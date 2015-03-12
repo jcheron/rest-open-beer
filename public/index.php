@@ -44,6 +44,6 @@ $app->get("/user/check", array(new UsersController(),"checkConnectedAction"));
 $app->post("/user/add", array(new UsersController(),"userAddAction"));
 $app->post("/user/connect", array(new UsersController(),"connectAction"));
 $app->get("/user/disconnect", array(new UsersController(),"disconnectAction"));
-$app->get("/user/exists", array(new UsersController(),"checkUserExistsAction"));
+$app->get("/user/exists/{login}", array(new UsersController(),"checkUserExistsAction"));
 
 $app->handle();

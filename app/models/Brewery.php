@@ -45,7 +45,7 @@ class Brewery extends \Phalcon\Mvc\Model
      */
     public function initialize()
     {
-        $this->setSource('Brewery');
+        $this->setSource('brewery');
     }
 	public function getId() {
 		return $this->id;

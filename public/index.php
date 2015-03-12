@@ -3,6 +3,10 @@
 use Ovide\Libs\Mvc\Rest\App;
 
 require __DIR__.'/../vendor/autoload.php';
+/**
+ * if php<5.6
+ */
+require __DIR__.'/../vendor/plus/hash_equals.php';
 
 
 $loader = new \Phalcon\Loader();
@@ -18,7 +22,7 @@ $app = App::instance();
 //Set up the database service
 $app->di->set('db', function(){
 	return new \Phalcon\Db\Adapter\Pdo\Mysql(array(
-			"host" => "localhost",
+			"host" => "127.0.0.1",
 			"username" => "root",
 			"password" => "",
 			"dbname" => "open-beer",

@@ -2,6 +2,10 @@
 use Phalcon\Mvc\Controller;
 class UsersController extends Controller {
 	private $token;
+
+	public function initialize(){
+		$this->response->setContentType('application/json', 'utf-8');
+	}
 	private function _auth($mail,$password){
 		$result=false;
 		$user=User::findFirst(array(
@@ -22,7 +26,6 @@ class UsersController extends Controller {
 	}
 
 	public function userAddAction(){
-		$this->response->setContentType('application/json', 'utf-8');
 		$user=new User();
 		$user->setMail($this->request->getPost("mail"));
 		$user->setPassword($this->request->getPost("password"));
@@ -35,7 +38,6 @@ class UsersController extends Controller {
 		}
 	}
 	public function checkUserExistsAction($mail){
-		$this->response->setContentType('application/json', 'utf-8');
 		$user=User::findFirst(array(
 				"conditions" => "mail = ?1",
 				"bind"       => array(1 => $mail)
@@ -47,7 +49,6 @@ class UsersController extends Controller {
 		}
 	}
 	public function checkConnectionAction($mail,$password){
-		$this->response->setContentType('application/json', 'utf-8');
 		if($this->_auth($mail, $password)){
 			echo '{token : '.$this->token.',connected: true}';
 		}else{
@@ -56,7 +57,6 @@ class UsersController extends Controller {
 	}
 
 	public function checkConnectedAction(){
-		$this->response->setContentType('application/json', 'utf-8');
 		if($this->session->has("token")){
 			echo '{token : '.$this->session->get("token").',connected: true}';
 		}else{
@@ -75,7 +75,6 @@ class UsersController extends Controller {
 	}
 
 	public function disconnectAction(){
-		$this->response->setContentType('application/json', 'utf-8');
 		$this->session->destroy();
 		echo '{connected: false}';
 	}

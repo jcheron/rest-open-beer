@@ -2,7 +2,7 @@
 use Ovide\Libs\Mvc\Rest\Controller;
 class MainRestController extends Controller {
 	protected function _isValidToken($token,$force=false){
-		return $force=="true" || $this->session->get("token")===$token;
+		return $force=="true" || (isset($token) && $this->session->get("token")===$token);
 	}
 
 	protected function sendMessage($type,$content){

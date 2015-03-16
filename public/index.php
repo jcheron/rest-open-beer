@@ -3,6 +3,10 @@
 use Ovide\Libs\Mvc\Rest\App;
 
 require __DIR__.'/../vendor/autoload.php';
+/**
+ * if php<5.6
+ */
+require __DIR__.'/../vendor/plus/hash_equals.php';
 
 
 $loader = new \Phalcon\Loader();
@@ -18,7 +22,7 @@ $app = App::instance();
 //Set up the database service
 $app->di->set('db', function(){
 	return new \Phalcon\Db\Adapter\Pdo\Mysql(array(
-			"host" => "localhost",
+			"host" => "127.0.0.1",
 			"username" => "root",
 			"password" => "",
 			"dbname" => "openbeer",
@@ -40,6 +44,6 @@ $app->get("/user/check", array(new UsersController(),"checkConnectedAction"));
 $app->post("/user/add", array(new UsersController(),"userAddAction"));
 $app->post("/user/connect", array(new UsersController(),"connectAction"));
 $app->get("/user/disconnect", array(new UsersController(),"disconnectAction"));
-$app->get("/user/exists", array(new UsersController(),"checkUserExistsAction"));
+$app->get("/user/exists/{login}", array(new UsersController(),"checkUserExistsAction"));
 
 $app->handle();

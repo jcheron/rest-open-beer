@@ -5,6 +5,15 @@ class User extends Model {
 	protected $mail;
 	protected $password;
 	protected $salt;
+
+	/**
+	 * Initialize method for model.
+	 */
+	public function initialize()
+	{
+		$this->setSource('user');
+	}
+
 	public function getId() {
 		return $this->id;
 	}

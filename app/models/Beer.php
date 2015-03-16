@@ -55,7 +55,7 @@ class Beer extends \Phalcon\Mvc\Model
      */
     public function initialize()
     {
-        $this->setSource('Beer');
+        $this->setSource('beer');
     }
 
 	public function getId() {

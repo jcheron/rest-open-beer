@@ -29,9 +29,9 @@ class UsersController extends Controller {
 		if($user->save()){
 			$token=bin2hex(openssl_random_pseudo_bytes(16));
 			$this->persistent->token = $token;
-			echo '{token: "'.$token.'",inserted: true}';
+			echo '{"token": "'.$token.'","inserted": true}';
 		}else{
-			echo "{inserted:false}";
+			echo '{"inserted":false}';
 		}
 	}
 	public function checkUserExistsAction($mail){
@@ -41,26 +41,26 @@ class UsersController extends Controller {
 				"bind"       => array(1 => $mail)
 		));
 		if($user){
-			echo '{exists: true,mail: "'.$mail.'"}';
+			echo '{"exists": true,"mail": "'.$mail.'"}';
 		}else{
-			echo '{exists: false,mail: "'.$mail.'"}';
+			echo '{"exists": false,"mail": "'.$mail.'"}';
 		}
 	}
 	public function checkConnectionAction($mail,$password){
 		$this->response->setContentType('application/json', 'utf-8');
 		if($this->_auth($mail, $password)){
-			echo '{token : '.$this->token.',connected: true}';
+			echo '{"token": "'.$this->token.'","connected": true}';
 		}else{
-			echo '{connected: false}';
+			echo '{"connected": false}';
 		}
 	}
 
 	public function checkConnectedAction(){
 		$this->response->setContentType('application/json', 'utf-8');
 		if($this->session->has("token")){
-			echo '{token : '.$this->session->get("token").',connected: true}';
+			echo '{"token" : "'.$this->session->get("token").'",connected: true}';
 		}else{
-			echo '{connected: false}';
+			echo '{"connected": false}';
 		}
 	}
 
@@ -68,15 +68,15 @@ class UsersController extends Controller {
 		$mail=$this->request->getPost("mail");
 		$password=$this->request->getPost("password");
 		if($this->_auth($mail, $password)){
-			echo '{token : '.$this->token.',connected: true}';
+			echo '{"token": "'.$this->token.'","connected": true}';
 		}else{
-			echo '{connected: false}';
+			echo '{"connected": false}';
 		}
 	}
 
 	public function disconnectAction(){
 		$this->response->setContentType('application/json', 'utf-8');
 		$this->session->destroy();
-		echo '{connected: false}';
+		echo '{"connected": false}';
 	}
 }

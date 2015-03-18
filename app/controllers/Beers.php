@@ -57,6 +57,8 @@ class Beers extends MainRestController{
 	        $beer->setDescription($obj["description"]);
 	        $beer->setAbv($obj["abv"]);
 	        $beer->setIdBrewery($obj["idBrewery"]);
+	        $beer->setPhoto($obj["photo"]);
+
 	        $beer->setUpdatedAt((new DateTime())->format('Y-m-d H:i:s'));
         		try{
 					$beer->save();

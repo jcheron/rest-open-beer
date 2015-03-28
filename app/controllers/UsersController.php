@@ -58,7 +58,7 @@ class UsersController extends Controller {
 
 	public function checkConnectedAction(){
 		if($this->session->has("token")){
-			echo '{"token" : "'.$this->session->get("token").'",connected: true}';
+			echo '{"token" : "'.$this->session->get("token").'","connected": true}';
 		}else{
 			echo '{"connected": false}';
 		}
